@@ -80,7 +80,7 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: screenAwareSize(245, context),
+      height: screenAwareSize(195, context),
       child: Stack(
         children: <Widget>[
           Stack(
@@ -189,13 +189,14 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
     });
   }
 
-  List <Widget> colorSelector() {
+  List<Widget> colorSelector() {
     List<Widget> colorItemList = List();
 
     for (var i = 0; i < colors.length; i++) {
-      colorItemList.add(colorItem(colors[i], i ==currentColorIndex, context, () {
+      colorItemList
+          .add(colorItem(colors[i], i == currentColorIndex, context, () {
         setState(() {
-         currentColorIndex = i; 
+          currentColorIndex = i;
         });
       }));
     }
@@ -379,7 +380,9 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
               ],
             ),
           ),
-          SizedBox(height: screenAwareSize(4.0, context),),
+          SizedBox(
+            height: screenAwareSize(4.0, context),
+          ),
           Padding(
             padding: EdgeInsets.only(left: screenAwareSize(18.0, context)),
             child: Text("Select Color",
@@ -397,6 +400,83 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
             height: screenAwareSize(34.0, context),
             child: Row(
               children: colorSelector(),
+            ),
+          ),
+          SizedBox(height: screenAwareSize(8.0, context)),
+          Padding(
+            padding: EdgeInsets.only(left: screenAwareSize(20.0, context)),
+            child: Text("price",
+                style: TextStyle(
+                    color: Color(0xFF949598),
+                    fontFamily: "Montserrat-SemiBold")),
+          ),
+          Container(
+            width: double.infinity,
+            height: screenAwareSize(100.0, context),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Container(
+                    margin:
+                        EdgeInsets.only(left: screenAwareSize(22.0, context)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: screenAwareSize(18.0, context)),
+                          child: Row(
+                            children: <Widget>[
+                              Text("\$",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: screenAwareSize(26.0, context),
+                                      fontFamily: "Montserrat-Medium")),
+                              SizedBox(width: screenAwareSize(2.0, context)),
+                              Text("80",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: screenAwareSize(26.0, context),
+                                      fontFamily: "Montserrat-Medium")),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: screenAwareSize(10.0, context)),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: MaterialButton(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: screenAwareSize(35.0, context)),
+                                child: Text("Add to cart",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: screenAwareSize(15.0, context),
+                                    )),
+                              ),
+                            ),
+                            onPressed: () {},
+                            color: Color(0xFFFB382F),
+                            padding: EdgeInsets.symmetric(
+                              vertical: screenAwareSize(14.0, context),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                Positioned(
+                  right: -20.0,
+                  bottom: -45.0,
+                  child: Image.asset("assets/cart.png",
+                      width: screenAwareSize(190, context),
+                      height: screenAwareSize(155.0, context),
+                      fit: BoxFit.cover,),
+                ),
+              ],
             ),
           ),
         ],
@@ -432,7 +512,8 @@ Widget sizeItem(String size, bool isSelected, BuildContext context) {
   );
 }
 
-Widget colorItem(Color color, bool isSelected, BuildContext context, VoidCallback _ontab) {
+Widget colorItem(
+    Color color, bool isSelected, BuildContext context, VoidCallback _ontab) {
   return GestureDetector(
     onTap: _ontab,
     child: Padding(
@@ -441,19 +522,20 @@ Widget colorItem(Color color, bool isSelected, BuildContext context, VoidCallbac
         width: screenAwareSize(30.0, context),
         height: screenAwareSize(30.0, context),
         decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(5.0),
-          boxShadow: isSelected ? [
-            BoxShadow(
-              color: Colors.black.withOpacity(.8),
-              blurRadius: 10.0,
-              offset: Offset(0.0, 10.0),
-            )
-          ] : []
-        ),
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(5.0),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.8),
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 10.0),
+                    )
+                  ]
+                : []),
         child: ClipPath(
           clipper: MClipper(),
-                  child: Container(
+          child: Container(
             width: double.infinity,
             height: double.infinity,
             color: color,
@@ -461,13 +543,12 @@ Widget colorItem(Color color, bool isSelected, BuildContext context, VoidCallbac
         ),
       ),
     ),
-  );  
+  );
 }
 
 class MClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-
     var path = new Path();
 
     path.lineTo(0.0, size.height);
@@ -483,7 +564,6 @@ class MClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
-
 }
 
 Widget divider() {
