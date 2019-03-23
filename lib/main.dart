@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> {
           body: Column(
             children: <Widget>[
               ProductScreenTopPart(),
+              ProductScreenBottomPart(),
             ],
           )),
     );
@@ -112,6 +113,7 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
             left: screenAwareSize(18.0, context),
             bottom: screenAwareSize(15.0, context),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   "Rating",
@@ -125,9 +127,10 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
                   children: <Widget>[
                     SizedBox(width: 8.0,),
                     Icon(Icons.star, color: Color(0xFFFFE600),),
+                    SizedBox(width: screenAwareSize(5.0, context),),
                     Text("4.5", style: TextStyle(color:Color(0xFFFFE600)),),
                     SizedBox(width: screenAwareSize(5.0, context),),
-                    Text("(378 People)", style: TextStyle(color: Colors.white)),
+                    Text("(378 People)", style: TextStyle(color: Colors.white, fontSize: 14.0)),
                   ],
                 )
               ],
@@ -135,6 +138,38 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ProductScreenBottomPart extends StatefulWidget {
+  final Widget child;
+
+  ProductScreenBottomPart({Key key, this.child}) : super(key: key);
+
+  _ProductScreenBottomPartState createState() => _ProductScreenBottomPartState();
+}
+
+class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: <Widget>[
+           Padding(
+             padding: EdgeInsets.only(left:screenAwareSize(18.0, context)),
+             child: Text("Product Description", style:TextStyle(
+               color: Color(0xFF949598),
+               fontSize: screenAwareSize(14.0, context),
+               fontFamily: "Montserrat-SemiBold"
+             )),
+           ),
+           SizedBox(height: screenAwareSize(8.0, context)),
+           AnimatedCrossFade()
+         ],
+       ),
     );
   }
 }
