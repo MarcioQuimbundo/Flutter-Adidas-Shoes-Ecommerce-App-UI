@@ -167,6 +167,7 @@ class ProductScreenBottomPart extends StatefulWidget {
 
 class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
   bool isExpanded = false;
+  int currentSizeIndex = 0;
   void _expand() {
     setState(() {
       isExpanded ? isExpanded = false : isExpanded = true;
@@ -220,10 +221,167 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                 left: screenAwareSize(26.0, context),
                 right: screenAwareSize(18.0, context)),
             child: GestureDetector(
-                onTap: _expand, child: Text(isExpanded ? "less" : "more..", style: TextStyle(color: Color(0xFFFB382F), fontWeight: FontWeight.w700),)),
+                onTap: _expand,
+                child: Text(
+                  isExpanded ? "less" : "more..",
+                  style: TextStyle(
+                      color: Color(0xFFFB382F), fontWeight: FontWeight.w700),
+                )),
           ),
+          SizedBox(
+            height: screenAwareSize(12.0, context),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: screenAwareSize(15.0, context),
+                right: screenAwareSize(75.0, context)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Size",
+                    style: TextStyle(
+                        color: Color(0xFF949598),
+                        fontFamily: "MontSerrat-SemiBold",
+                        fontSize: screenAwareSize(10.0, context))),
+                Text("Quantity",
+                    style: TextStyle(
+                        color: Color(0xFF949598),
+                        fontFamily: "MontSerrat-SemiBold",
+                        fontSize: screenAwareSize(10.0, context))),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: screenAwareSize(8.0, context),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: screenAwareSize(20.0, context)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  height: screenAwareSize(38.0, context),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: sizeNumList.map((item) {
+                      var index = sizeNumList.indexOf(item);
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            currentSizeIndex = index;
+                          });
+                        },
+                        child:
+                            sizeItem(item, index == currentSizeIndex, context),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(screenAwareSize(12.0, context)),
+                  child: Container(
+                    width: screenAwareSize(100.0, context),
+                    height: screenAwareSize(30.0, context),
+                    decoration: BoxDecoration(
+                        color: Color(0xFF525663),
+                        borderRadius: BorderRadius.circular(5.0)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Flexible(
+                          flex: 3,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  "-",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontFamily: "Montserrat-Bold"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  "1",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontFamily: "Montserrat-Bold"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  "+",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontFamily: "Montserrat-Bold"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
   }
+}
+
+Widget sizeItem(String size, bool isSelected, BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.only(
+      left: screenAwareSize(15, context),
+    ),
+    child: Container(
+      width: screenAwareSize(30.0, context),
+      height: screenAwareSize(30.0, context),
+      decoration: BoxDecoration(
+          color: isSelected ? Color(0xFFFC3930) : Color(0xFF522663),
+          borderRadius: BorderRadius.circular(5.0),
+          boxShadow: [
+            BoxShadow(
+              color: isSelected ? Colors.black.withOpacity(.5) : Colors.black12,
+              offset: Offset(0.0, 10.0),
+              blurRadius: 10.0,
+            ),
+          ]),
+      child: Center(
+        child: Text(size,
+            style:
+                TextStyle(color: Colors.white, fontFamily: "Montserrat-Bold")),
+      ),
+    ),
+  );
+}
+
+Widget divider() {
+  
 }
