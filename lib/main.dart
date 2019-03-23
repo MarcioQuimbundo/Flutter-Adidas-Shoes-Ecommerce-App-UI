@@ -192,8 +192,10 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
     List<Widget> colorItemList = List();
 
     for (var i = 0; i < colors.length; i++) {
-      colorItemList.add(colorItem());
+      colorItemList.add(colorItem(colors[1], true, context, () {}));
     }
+
+    return colorItemList;
   }
 
   @override
