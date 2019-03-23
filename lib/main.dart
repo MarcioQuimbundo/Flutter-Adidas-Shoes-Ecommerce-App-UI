@@ -48,11 +48,42 @@ class _MyAppState extends State<MyApp> {
             actions: <Widget>[
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.favorite_border, size: screenAwareSize(20.0, context), color: Colors.white,),
+                icon: Icon(
+                  Icons.favorite_border,
+                  size: screenAwareSize(20.0, context),
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
-          body: Container()),
+          body: Column(children: <Widget>[
+            ProductScreenTopPart(),
+          ],)),
+    );
+  }
+}
+
+class ProductScreenTopPart extends StatefulWidget {
+  final Widget child;
+
+  ProductScreenTopPart({Key key, this.child}) : super(key: key);
+
+  _ProductScreenTopPartState createState() => _ProductScreenTopPartState();
+}
+
+class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+       width: double.infinity,
+       height: screenAwareSize(245, context),
+       child: Stack(
+         children: <Widget>[
+           Container(
+             child: Image.asset("assets/adidas.png", width: double.infinity, height: double.infinity, fit: BoxFit.contain,),
+           )
+         ],
+       ),
     );
   }
 }
