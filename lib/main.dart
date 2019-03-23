@@ -167,6 +167,12 @@ class ProductScreenBottomPart extends StatefulWidget {
 
 class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
   bool isExpanded = false;
+  void _expand() {
+    setState(() {
+      isExpanded ? isExpanded = false : isExpanded = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -183,25 +189,38 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                     fontFamily: "Montserrat-SemiBold")),
           ),
           SizedBox(height: screenAwareSize(8.0, context)),
-          AnimatedCrossFade(
-            firstChild: Text(
-              desc,
-              maxLines: 2,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: screenAwareSize(10.0, context),
-                  fontFamily: "Montserrat-Medium"),
+          Padding(
+            padding: EdgeInsets.only(
+                left: screenAwareSize(26.0, context),
+                right: screenAwareSize(18.0, context)),
+            child: AnimatedCrossFade(
+              firstChild: Text(
+                desc,
+                maxLines: 2,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: screenAwareSize(10.0, context),
+                    fontFamily: "Montserrat-Medium"),
+              ),
+              secondChild: Text(
+                desc,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: screenAwareSize(10.0, context),
+                    fontFamily: "Montserrat-Medium"),
+              ),
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+              duration: kThemeAnimationDuration,
             ),
-            secondChild: Text(
-              desc,
-              maxLines: 2,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: screenAwareSize(10.0, context),
-                  fontFamily: "Montserrat-Medium"),
-            ),
-            crossFadeState: isExpanded ? CrossFadeState.showSecond:CrossFadeState.showFirst,
-            duration: kThemeAnimationDuration,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: screenAwareSize(26.0, context),
+                right: screenAwareSize(18.0, context)),
+            child: GestureDetector(
+                onTap: _expand, child: Text(isExpanded ? "less" : "more..", style: TextStyle(color: Color(0xFFFB382F), fontWeight: FontWeight.w700),)),
           ),
         ],
       ),
