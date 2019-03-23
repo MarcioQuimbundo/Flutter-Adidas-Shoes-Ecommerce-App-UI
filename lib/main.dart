@@ -168,6 +168,7 @@ class ProductScreenBottomPart extends StatefulWidget {
 class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
   bool isExpanded = false;
   int currentSizeIndex = 0;
+  int currentColorIndex = 0;
   int _counter = 0;
 
   void _increase() {
@@ -192,7 +193,11 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
     List<Widget> colorItemList = List();
 
     for (var i = 0; i < colors.length; i++) {
-      colorItemList.add(colorItem(colors[1], true, context, () {}));
+      colorItemList.add(colorItem(colors[i], i ==currentColorIndex, context, () {
+        setState(() {
+         currentColorIndex = i; 
+        });
+      }));
     }
 
     return colorItemList;
@@ -388,6 +393,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
           ),
           Container(
             width: double.infinity,
+            margin: EdgeInsets.only(left: screenAwareSize(20.0, context)),
             height: screenAwareSize(34.0, context),
             child: Row(
               children: colorSelector(),
@@ -445,14 +451,39 @@ Widget colorItem(Color color, bool isSelected, BuildContext context, VoidCallbac
             )
           ] : []
         ),
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: color,
+        child: ClipPath(
+          clipper: MClipper(),
+                  child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: color,
+          ),
         ),
       ),
     ),
   );  
+}
+
+class MClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+
+    var path = new Path();
+
+    path.lineTo(0.0, size.height);
+    path.lineTo(size.width * 0.2, size.height);
+    path.lineTo(size.width, size.height * 0.2);
+    path.lineTo(size.width, 0.0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
+  }
+
 }
 
 Widget divider() {
