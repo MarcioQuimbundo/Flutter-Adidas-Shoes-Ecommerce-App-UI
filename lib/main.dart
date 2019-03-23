@@ -412,7 +412,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
           ),
           Container(
             width: double.infinity,
-            height: screenAwareSize(100.0, context),
+            height: screenAwareSize(110.0, context),
             child: Stack(
               alignment: Alignment.topCenter,
               children: <Widget>[
