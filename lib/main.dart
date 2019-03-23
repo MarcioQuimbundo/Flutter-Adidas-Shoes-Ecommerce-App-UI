@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(
-  home: MyApp(),
-  debugShowCheckedModeBanner: false,
-),
-);
+void main() => runApp(
+      MaterialApp(
+        home: MyApp(),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
 
 class MyApp extends StatefulWidget {
   final Widget child;
@@ -21,15 +22,21 @@ class _MyAppState extends State<MyApp> {
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFF696077),
-            Color(0xFF292C36)
-          ],
+          colors: [Color(0xFF696077), Color(0xFF292C36)],
           begin: Alignment.center,
-          end: Alignment.bottomCenter
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
         ),
       ),
-       child: Scaffold(body: Container()),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {},
+            ),
+          ),
+          body: Container()),
     );
   }
 }
