@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './utils.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -31,10 +32,25 @@ class _MyAppState extends State<MyApp> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
+              iconSize: screenAwareSize(20.0, context),
               onPressed: () {},
             ),
+            centerTitle: true,
+            title: Text("Energy Cloud",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: screenAwareSize(18.0, context),
+                    fontFamily: "Montserrat-Bold")),
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.favorite_border, size: screenAwareSize(20.0, context), color: Colors.white,),
+              ),
+            ],
           ),
           body: Container()),
     );
