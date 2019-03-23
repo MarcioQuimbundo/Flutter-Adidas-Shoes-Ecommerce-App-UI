@@ -172,13 +172,13 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
 
   void _increase() {
     setState(() {
-     _counter++; 
+      _counter++;
     });
   }
 
   void _decrease() {
     setState(() {
-     _counter--; 
+      _counter--;
     });
   }
 
@@ -186,6 +186,14 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
     setState(() {
       isExpanded ? isExpanded = false : isExpanded = true;
     });
+  }
+
+  List <Widget> colorSelector() {
+    List<Widget> colorItemList = List();
+
+    for (var i = 0; i < colors.length; i++) {
+      colorItemList.add(colorItem());
+    }
   }
 
   @override
@@ -265,11 +273,10 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
               ],
             ),
           ),
-          SizedBox(
-            height: screenAwareSize(8.0, context),
-          ),
           Padding(
-            padding: EdgeInsets.only(left: screenAwareSize(20.0, context)),
+            padding: EdgeInsets.only(
+                left: screenAwareSize(20.0, context),
+                right: screenAwareSize(10.0, context)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -364,7 +371,26 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                 ),
               ],
             ),
-          )
+          ),
+          SizedBox(height: screenAwareSize(4.0, context),),
+          Padding(
+            padding: EdgeInsets.only(left: screenAwareSize(18.0, context)),
+            child: Text("Select Color",
+                style: TextStyle(
+                    color: Color(0xFF949598),
+                    fontSize: screenAwareSize(14.0, context),
+                    fontFamily: "Montserrat-SemiBold")),
+          ),
+          SizedBox(
+            height: screenAwareSize(8.0, context),
+          ),
+          Container(
+            width: double.infinity,
+            height: screenAwareSize(34.0, context),
+            child: Row(
+              children: colorSelector(),
+            ),
+          ),
         ],
       ),
     );
@@ -374,7 +400,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
 Widget sizeItem(String size, bool isSelected, BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(
-      left: screenAwareSize(15, context),
+      left: screenAwareSize(12, context),
     ),
     child: Container(
       width: screenAwareSize(30.0, context),
@@ -396,6 +422,35 @@ Widget sizeItem(String size, bool isSelected, BuildContext context) {
       ),
     ),
   );
+}
+
+Widget colorItem(Color color, bool isSelected, BuildContext context, VoidCallback _ontab) {
+  return GestureDetector(
+    onTap: _ontab,
+    child: Padding(
+      padding: EdgeInsets.only(left: screenAwareSize(10.0, context)),
+      child: Container(
+        width: screenAwareSize(30.0, context),
+        height: screenAwareSize(30.0, context),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(5.0),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: Colors.black.withOpacity(.8),
+              blurRadius: 10.0,
+              offset: Offset(0.0, 10.0),
+            )
+          ] : []
+        ),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: color,
+        ),
+      ),
+    ),
+  );  
 }
 
 Widget divider() {
