@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './utils.dart';
+import './data.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -125,12 +126,25 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
                 SizedBox(height: screenAwareSize(8.0, context)),
                 Row(
                   children: <Widget>[
-                    SizedBox(width: 8.0,),
-                    Icon(Icons.star, color: Color(0xFFFFE600),),
-                    SizedBox(width: screenAwareSize(5.0, context),),
-                    Text("4.5", style: TextStyle(color:Color(0xFFFFE600)),),
-                    SizedBox(width: screenAwareSize(5.0, context),),
-                    Text("(378 People)", style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Color(0xFFFFE600),
+                    ),
+                    SizedBox(
+                      width: screenAwareSize(5.0, context),
+                    ),
+                    Text(
+                      "4.5",
+                      style: TextStyle(color: Color(0xFFFFE600)),
+                    ),
+                    SizedBox(
+                      width: screenAwareSize(5.0, context),
+                    ),
+                    Text("(378 People)",
+                        style: TextStyle(color: Colors.white, fontSize: 14.0)),
                   ],
                 )
               ],
@@ -147,29 +161,50 @@ class ProductScreenBottomPart extends StatefulWidget {
 
   ProductScreenBottomPart({Key key, this.child}) : super(key: key);
 
-  _ProductScreenBottomPartState createState() => _ProductScreenBottomPartState();
+  _ProductScreenBottomPartState createState() =>
+      _ProductScreenBottomPartState();
 }
 
 class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-       child: Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
-         children: <Widget>[
-           Padding(
-             padding: EdgeInsets.only(left:screenAwareSize(18.0, context)),
-             child: Text("Product Description", style:TextStyle(
-               color: Color(0xFF949598),
-               fontSize: screenAwareSize(14.0, context),
-               fontFamily: "Montserrat-SemiBold"
-             )),
-           ),
-           SizedBox(height: screenAwareSize(8.0, context)),
-           AnimatedCrossFade()
-         ],
-       ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: screenAwareSize(18.0, context)),
+            child: Text("Product Description",
+                style: TextStyle(
+                    color: Color(0xFF949598),
+                    fontSize: screenAwareSize(14.0, context),
+                    fontFamily: "Montserrat-SemiBold")),
+          ),
+          SizedBox(height: screenAwareSize(8.0, context)),
+          AnimatedCrossFade(
+            firstChild: Text(
+              desc,
+              maxLines: 2,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: screenAwareSize(10.0, context),
+                  fontFamily: "Montserrat-Medium"),
+            ),
+            secondChild: Text(
+              desc,
+              maxLines: 2,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: screenAwareSize(10.0, context),
+                  fontFamily: "Montserrat-Medium"),
+            ),
+            crossFadeState: isExpanded ? CrossFadeState.showSecond:CrossFadeState.showFirst,
+            duration: kThemeAnimationDuration,
+          ),
+        ],
+      ),
     );
   }
 }
