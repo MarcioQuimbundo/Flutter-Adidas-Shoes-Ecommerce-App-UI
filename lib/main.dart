@@ -81,6 +81,19 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
          children: <Widget>[
            Container(
              child: Image.asset("assets/adidas.png", width: double.infinity, height: double.infinity, fit: BoxFit.contain,),
+           ),
+
+           Align(
+             alignment: Alignment.topRight,
+             child: Container(
+               width: screenAwareSize(50.0, context),
+               height: screenAwareSize(50.0, context),
+               decoration: BoxDecoration(
+                 color: Colors.black26,
+                 shape: BoxShape.circle,
+               ),
+               child: Image.asset("assets/360.png"),
+             ),
            )
          ],
        ),
