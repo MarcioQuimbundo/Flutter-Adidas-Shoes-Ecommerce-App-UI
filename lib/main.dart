@@ -168,6 +168,20 @@ class ProductScreenBottomPart extends StatefulWidget {
 class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
   bool isExpanded = false;
   int currentSizeIndex = 0;
+  int _counter = 0;
+
+  void _increase() {
+    setState(() {
+     _counter++; 
+    });
+  }
+
+  void _decrease() {
+    setState(() {
+     _counter--; 
+    });
+  }
+
   void _expand() {
     setState(() {
       isExpanded ? isExpanded = false : isExpanded = true;
@@ -291,7 +305,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                         Flexible(
                           flex: 3,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: _decrease,
                             child: Container(
                               height: double.infinity,
                               child: Center(
@@ -306,6 +320,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                             ),
                           ),
                         ),
+                        divider(),
                         Flexible(
                           flex: 3,
                           child: GestureDetector(
@@ -314,7 +329,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                               height: double.infinity,
                               child: Center(
                                 child: Text(
-                                  "1",
+                                  _counter.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20.0,
@@ -324,10 +339,11 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                             ),
                           ),
                         ),
+                        divider(),
                         Flexible(
                           flex: 3,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: _increase,
                             child: Container(
                               height: double.infinity,
                               child: Center(
@@ -383,5 +399,11 @@ Widget sizeItem(String size, bool isSelected, BuildContext context) {
 }
 
 Widget divider() {
-  
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+    child: Container(
+      width: 0.8,
+      color: Colors.black,
+    ),
+  );
 }
