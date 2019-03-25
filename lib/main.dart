@@ -93,7 +93,7 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
                   fit: BoxFit.contain,
                 ),
               ),
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.only(top: 60.0, right: 35.0),
                 child: Align(
                   alignment: Alignment.topRight,
@@ -107,7 +107,7 @@ class _ProductScreenTopPartState extends State<ProductScreenTopPart> {
                     child: Image.asset("assets/360.png"),
                   ),
                 ),
-              )
+              )*/
             ],
           ),
           Positioned(
